@@ -1,0 +1,8 @@
+{
+  "crossAccountRoute53": true,
+  "IsParentAccount": false,
+  "parentAccountId": "111222333444", 
+  "childAccountId": "555666777888",  
+  "zoneName": "aboavent.net",        
+  "subZoneName": "eksd.aboavent.net" 
+}

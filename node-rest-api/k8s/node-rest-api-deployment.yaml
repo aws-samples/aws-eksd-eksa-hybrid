@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: node-rest-api
+  name: node-rest-api-controller
+spec:
+  replicas: 2
+  selector:
+    name: node-rest-api
+  template:
+    metadata:
+      labels:
+        name: node-rest-api
+    spec:
+      containers:
+      - image: YOUR-CONTAINER-IMAGE
+        name: node-rest-api
+        ports:
+        - containerPort: 3000
+          name: http-server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-rest-api
+  labels:
+    name: node-rest-api
+spec:
+  type: ClusterIP
+  ports:
+    - name: node-rest-api
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    name: node-rest-api
