@@ -350,7 +350,7 @@ More details on EKS-D releases can be found [here](https://distro.eks.amazonaws.
 
 [Context values](https://docs.aws.amazon.com/cdk/v2/guide/context.html) are key-value pairs that can be associated with an AWS CDK app, stack, or construct, and they can be provided in different ways.
 
-In this example, there are some key-values used to control the way application will deploy the AWS Route 53 parent and subdomain depending whether or not a multi AWS account setup will be utilized to deploy the EKS Distro cluster through kOps.
+In this example, there are some key-values used to control the way application will deploy the AWS Route 53 parent and subdomain depending whether or not a multi AWS account setup will be utilized to deploy the EKS Distro cluster through kOps. This AWS CDK configuration file is located in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/cdk.context.json`
 
 That said, you may indicate whether or not you will be deploying a parent hosted zone in a different account than the child hosted zone. If so, set `"crossAccountRoute53": true` and run AWS CDK app described in the section below twice: 
  1) At first, on the parent account by changing the `"IsParentAccount": true`
@@ -472,7 +472,7 @@ More details on how to [Configure DNS for kops](https://kops.sigs.k8s.io/getting
 
 EKS Distro installation comes with kops binaries and some scripts to streamline the deployment process. In turn, `kOps` is used to create and manage kubernetes clusters, including EKS Distro clusters, with multiple master and worker nodes distributed across multiple AZs for high availability purposes. Behind the scenes, it spins up EC2 instances, sets up security with IAM user and IAM roles and networking including VPC, subnets, routing tables, Route 53 NS records, security groups, and auto scaling groups, among other AWS resources to properly deploy EKS Distro on top of a highly scalable infrastructure as needed.
 
-The automation script, `/src/config.sh`, has exported `KOPS_STATE_STORE` to the s3 bucket for EKS-D kops configuration. This S3 bucket was used to store both the state and representation of the EKS-D cluster. When kops state store does not exist, the cluster configuration script creates one for you. _You must have set `KOPS_CLUSTER_NAME` to the same valid subdomain controlled by AWS Route 53 configured in the previous section while setting up the **subZoneName** parameter in the `cdk.context.json` file._
+The automation script, `/src/config.sh`, has exported `KOPS_STATE_STORE` to the s3 bucket for EKS-D kops configuration. This S3 bucket was used to store both the state and representation of the EKS-D cluster. When kops state store does not exist, the cluster configuration script creates one for you. _You must have set `KOPS_CLUSTER_NAME` to the same valid subdomain controlled by AWS Route 53 configured in the previous section while setting up the **subZoneName** parameter in the `./cdk/cdk-eksdistro/cdk.context.json` file._
 
 As such, you may find that this script runs `./run_cluster.sh` to both create the configuration and required cloud resources for the EKS Distro Cluster:
 
