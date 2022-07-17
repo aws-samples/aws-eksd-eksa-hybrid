@@ -321,7 +321,7 @@ The `/src/config.sh` file is used as [user-data](https://docs.aws.amazon.com/AWS
 - create the cluster configuration
 - wait for the cluster to come up until deployment is finished 
 
-This script is located at in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/src/config.sh`.
+This script is located in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/src/config.sh`.
 
 You should change the following environment variables to point to your environment configuration accordingly before deploying the CDK app. 
 
