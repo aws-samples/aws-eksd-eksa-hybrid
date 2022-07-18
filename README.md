@@ -954,7 +954,7 @@ kubectl config get-contexts
 
 ## 4. Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB
 
-Since setup process has completely finished, we can move on and get started with the sample application provisioning which consists of an API written in Node.js. This API will be deployed on top of the 3 EKS clusters to consume a Movies collection stored in Amazon DocumentDB and expose that dataset to be consumed by any external client via REST interface. Here is the API architecture diagram:
+Once setup process has completely finished, we can move on and get started with the sample application provisioning which consists of an API written in Node.js. This API will be deployed on top of the 3 EKS clusters to consume a Movies collection stored in Amazon DocumentDB and expose that dataset to be consumed by any external client via REST interface. Here is the API architecture diagram:
 
 <p align="center">
   <img src="./images/Sample-Node-DocumentDB-application.png" alt="Sample application image"/>
