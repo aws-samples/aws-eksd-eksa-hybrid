@@ -736,7 +736,7 @@ This repository contains CDK source code with 1 stack(**`CdkEksAnywhereStack`**)
  
 ### b. Building and deploying the EKS Anywhere CDK app
 
-You'll need to deploy the EKS Anywhere CDK app to create and deploy a development cluster with EKS Anywhere. The EC2 instance provisioned by this stack contains a script `/src/config.sh` that will be used to automate the generation of cluster configurations and deployment. Before deploying the EKS Anywhere stack(**CdkEksAnywhereStack**), you may change its cluster name, if needed, by setting up the `CLUSTER_NAME` environment variable, which in turn, wil be used to properly register the EKS Anywhere cluster with the same name in the EKS Console during EKS Connector setup. 
+You'll need to deploy the EKS Anywhere CDK app to create and deploy a development cluster with EKS Anywhere. The EC2 instance provisioned by this stack contains a script `/src/config.sh` that will be used to automate the generation of cluster configurations and deployment. Before deploying the EKS Anywhere stack(**CdkEksAnywhereStack**), you may change its cluster name, if needed, by setting up the `CLUSTER_NAME` environment variable, which in turn, will be used to properly register the EKS Anywhere cluster with the same name in the EKS Console during EKS Connector setup. 
 
 This script is located at your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksanywhere/src/config.sh`
 
