@@ -111,7 +111,7 @@ git clone https://github.com/aboavent/aws-eksd-eksa-hybrid.git
 
 ### c. Getting to know the EKS Distro CDK app
 
-This repository contains source code for an AWS CDK app consisting of 2 stacks(**`CdkRoute53Stack`** and **`CdkEksdistroStack`**, respectively), which are equivalent to AWS CloudFormation stacks, to automate EKS Distro deployment. They have been written in TypeScript and use AWS CDK to define the AWS infrastructure needed for stand up the EKS Distro cluster as needed. In turn, stacks contain constructs, each of which defining one or more concrete AWS resources, such as EC2 instances, IAM roles, S3 buckets, and so on. In this example, you may find below each stack, with their respective AWS resources, initialized by some of the AWS CDK constructs.
+This repository contains source code for an AWS CDK app consisting of 2 stacks(**`CdkRoute53Stack`** and **`CdkEksdistroStack`**, respectively), which are equivalent to AWS CloudFormation stacks, to automate EKS Distro deployment. They have been written in TypeScript and use AWS CDK to define the AWS infrastructure needed for standing up the EKS Distro cluster as needed. In turn, stacks contain constructs, each of which defining one or more concrete AWS resources, such as EC2 instances, IAM roles, S3 buckets, and so on. In this example, you may find below each stack, with their respective AWS resources, initialized by some of the AWS CDK constructs.
 
 **Key AWS CDK constructs used in the CdkRoute53Stack** (`./cdk/cdk-eksdistro/lib/cdk-route53-stack.ts`)
 
