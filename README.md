@@ -943,7 +943,7 @@ export CONTEXT_EKSA="EKS-A"
 export CONTEXT_EKS="EKS"
 ```
 
-Now, display the list of kubernetes contexts which includes the 3 EKS clusters we have created so far.
+Now, display the list of kubernetes contexts which include the 3 EKS clusters that we have created so far.
 
 ```bash
 kubectl config get-contexts
