@@ -350,7 +350,7 @@ More details on EKS-D releases can be found [here](https://distro.eks.amazonaws.
 
 [Context values](https://docs.aws.amazon.com/cdk/v2/guide/context.html) are key-value pairs that can be associated with an AWS CDK app, stack, or construct, and they can be provided in different ways.
 
-In this example, there are some key-values used to control the way application will deploy the AWS Route 53 parent and subdomain depending whether or not a multi AWS account setup will be utilized to deploy the EKS Distro cluster through kOps. This AWS CDK configuration file is located in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/cdk.context.json`
+In this example, there are some key-values used to control the way application will deploy the AWS Route 53 parent and subdomain depending on whether or not a multi AWS account setup will be utilized to deploy the EKS Distro cluster through kOps. This AWS CDK configuration file is located in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/cdk.context.json`
 
 That said, you may indicate whether or not you will be deploying a parent hosted zone in a different account than the child hosted zone. If so, set `"crossAccountRoute53": true` and run AWS CDK app described in the section below twice: 
  1) At first, on the parent account by changing the `"IsParentAccount": true`
