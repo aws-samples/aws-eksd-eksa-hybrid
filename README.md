@@ -1502,7 +1502,7 @@ curl --silent --location --request DELETE "localhost:$REST_API_PORT/movie/$MOVIE
 ```
  </details> 
  
-As such, run this script in the AWS Cloud9 terminal to consume the Movies REST API across all the EKS clusters. Also, you can perform additional calls to the API as per your convience. The script below is only a reference:
+As such, run this script in the AWS Cloud9 terminal to consume the Movies REST API across all the EKS clusters. Also, you can perform additional calls to the API as per your convenience. The script below is only a reference:
  
 ```bash
 chmod +x node-rest-api-test.sh
