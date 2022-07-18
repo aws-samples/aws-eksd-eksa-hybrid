@@ -742,7 +742,7 @@ This script is located at your AWS Cloud9 environment at `~/environment/aws-eksd
 
 ![EKS-A-config-script-optional](./images/EKS-A-config-script-optional.png)
 
-Additionaly, you're **REQUIRED** to change the `IAM_ARN` environment variable, found within the same script, to define an IAM user or role to be utilized while setting up the EKS Connector to be able to view the EKS Anywhere resources on the Amazon EKS console.
+Additionally, you're **REQUIRED** to change the `IAM_ARN` environment variable, found within the same script, to define an IAM user or role to be utilized while setting up the EKS Connector to be able to view the EKS Anywhere resources on the Amazon EKS console.
 
 ![EKS-A-config-script-IAM-ARN](./images/EKS-A-config-script-IAM-ARN.png)
 
