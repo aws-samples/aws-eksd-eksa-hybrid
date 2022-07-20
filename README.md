@@ -1598,6 +1598,13 @@ To remove the three Amazon EKS clusters created throughout this example, run the
 > Type __Y__ to confirm stacks destruction
 
 ```bash
+## Clean up Amazon DocumentDB cluster
+cd ~/environment/aws-eksd-eksa-hybrid/documentdb
+chmod +x remove_documentdb.sh
+./remove_documentdb.sh
+chmod +x vpc-peering-destroy.sh
+./vpc-peering-destroy.sh
+ 
 ## Clean up EKS Distro
 cd ~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro
 ssh -i cdk-eksd-key-pair.pem ec2-user@X.X.X.X ./delete_cluster.sh
@@ -1618,14 +1625,7 @@ eksctl delete cluster --region=$AWS_REGION --name $EKS_CLUSTER_NAME
 aws ecr batch-delete-image \
      --repository-name "${image}" \
      --image-ids imageTag=latest
-aws ecr delete-repository --repository-name "${image}" 
- 
-## Clean up Amazon DocumentDB cluster
-cd ~/environment/aws-eksd-eksa-hybrid/documentdb
-chmod +x remove_documentdb.sh
-./remove_documentdb.sh
-chmod +x vpc-peering-destroy.sh
-./vpc-peering-destroy.sh 
+aws ecr delete-repository --repository-name "${image}"   
 ```
 
 
