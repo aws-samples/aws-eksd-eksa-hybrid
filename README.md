@@ -33,7 +33,7 @@ In this project, you'll get to know how to build and automate creation of develo
 4. [Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB](#4-building-and-deploying-a-rest-api-with-nodejs-express-and-amazon-documentdb)
 5. [Monitoring EKS Distro and EKS Anywhere by using EKS Connector](#5-monitoring-eks-distro-and-eks-anywhere-by-using-eks-connector-optional) **(Optional)**
 
-#### Overall EKS hybrid environment architecture
+#### Overall Hybrid-EKS development environment architecture
 
 ![ekshybridarchitecture](./images/EKShybridarchitecture-v3-numbered.png)
 
