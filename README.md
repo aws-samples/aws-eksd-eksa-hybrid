@@ -913,7 +913,7 @@ curl "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(una
     | tar xz -C $HOME/bin
 
 export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
-export EKS_CLUSTER_NAME=eks-prod
+export EKS_CLUSTER_NAME=eks-dev
 eksctl create cluster --name=$EKS_CLUSTER_NAME --nodes=6 --region=$AWS_REGION
 ```
 
