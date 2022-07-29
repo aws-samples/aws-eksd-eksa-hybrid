@@ -60,7 +60,7 @@ In this section, I will explain how to deploy EKS Distro using the AWS CDK in th
 
 a. [Create and configure an AWS Cloud9 environment](#a-create-and-configure-an-aws-cloud9-environment)
 
-b. [Clone the Hybrid-EKS development environment sample code repository and installing dependencies](#b-clone-the-hybrid-eks-development-environment-sample-code-repository-and-installing-dependencies)
+b. [Clone the Hybrid-EKS development environment sample code repository and install dependencies](#b-clone-the-hybrid-eks-development-environment-sample-code-repository-and-install-dependencies)
 
 c. [Getting to know the EKS Distro CDK app](#c-getting-to-know-the-eks-distro-cdk-app)
 
@@ -93,7 +93,7 @@ Click _**Cloud9**_ and create an AWS Cloud9 environment in any region of your pr
 
 Launch the AWS Cloud9 IDE and open a new terminal session. Before getting started with installation, you will need to properly grant permissions to create the EKS Distro cluster with kops as required. There are some ways to provide credentials to the Cloud9 environment to proceed with cluster deployment such as [attaching an IAM instance profile](https://docs.aws.amazon.com/cloud9/latest/user-guide/credentials.html#credentials-temporary) to the EC2 instance or [creating/modifying an IAM user](https://kops.sigs.k8s.io/getting_started/aws/) with [permanent AWS access credentials](https://docs.aws.amazon.com/cloud9/latest/user-guide/credentials.html#credentials-permanent-create) which should be stored within the environment using either `aws configure` or environment variables(`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`). Detailed instructions on how to create an IAM role for Cloud9 workspace can also be found [here](https://www.eksworkshop.com/020_prerequisites/iamrole/) and how to attach it to the just created workspace [here](https://www.eksworkshop.com/020_prerequisites/ec2instance/). Additionally, you must turn off the AWS managed temporary credentials of the Cloud9 environment as explained [here](https://www.eksworkshop.com/020_prerequisites/workspaceiam/). You may also need to resize the Amazon Elastic Block Store (Amazon EBS) volume that is associated with the Amazon EC2 instance for this AWS Cloud9 environment, which is documented [here](https://docs.aws.amazon.com/cloud9/latest/user-guide/move-environment.html#move-environment-resize).
 
-### b. Clone the Hybrid-EKS development environment sample code repository and installing dependencies
+### b. Clone the Hybrid-EKS development environment sample code repository and install dependencies
 
 Let's get started by installing the dependencies to set up this environment. If needed, there are more details on how to configure `kubectl` [here](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) 
 
