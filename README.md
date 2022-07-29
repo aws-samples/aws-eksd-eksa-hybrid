@@ -23,10 +23,12 @@ In summary, the way to think about these 2 offerings is that EKS Distro gives cu
 ## A 10,000-foot view of the EKS hybrid environment architecture
 
 
-In this project, I will discuss and implement the following architecture consisting of 3 EKS clusters created with EKS Distro, EKS Anywhere, and EKS on AWS Cloud by leveraging the [AWS CDK](https://aws.amazon.com/cdk/) to automate infrastructure provisioning and configuration. Also, you will learn how to implement a hybrid EKS environment and monitor all of the clusters from a single pane of glass with EKS Console through the integration with [EKS Connector](https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html). Here are the sections to fully implement the architecture below:
+In this project, you'll get to know how to build and automate creation of development and prototype environments for hybrid and cloud software delivery using [AWS CDK](https://aws.amazon.com/cdk/) to automate EKS Distro and EKS Anywhere environments provisioning, allowing a seamless experience while standing up and standardizing their kubernetes environments and applications deployment on top of EKS. It was designed to explore ways and best practices to abstract the challenges and complexities of deploying hybrid EKS development infrastructure targeted at DevOps teams, allowing repeatable workload development and testing which can be easily integrated with existing CI/CD pipelines using a simple and consistent method, as needed. The approaches, which are thoroughly explored throughout this example, can then be used by developers across an enterprise and diverse teams in a repeatable and predictable way. For operations teams, they will not only simplify deployment of “well-architected” and hybrid EKS development environments aiming the automation of software delivery using DevOps techniques and best practices with the AWS CDK, but also consolidate administration and monitoring of all EKS clusters, from a single pane of glass, by utilizing the EKS Console, through the integration with [EKS Connector](https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html), as a central management platform.
 
-1. [Getting our hands dirty with EKS Distro](#1-getting-our-hands-dirty-with-eks-distro)
-2. [Taking EKS Anywhere for a spin](#2-taking-eks-anywhere-for-a-spin)
+### Content
+
+1. [Getting our hands dirty with EKS Distro and AWS CDK](#1-getting-our-hands-dirty-with-eks-distro-and-aws-cdk)
+2. [Taking EKS Anywhere and AWS CDK for a spin](#2-taking-eks-anywhere-and-aws-cdk-for-a-spin)
 3. [Spinning up an EKS cluster on AWS Cloud](#3-spinning-up-an-eks-cluster-on-aws-cloud)
 4. [Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB](#4-building-and-deploying-a-rest-api-with-nodejs-express-and-amazon-documentdb)
 5. [Monitoring EKS Distro and EKS Anywhere by using EKS Connector](#5-monitoring-eks-distro-and-eks-anywhere-by-using-eks-connector-optional) **(Optional)**
@@ -37,7 +39,7 @@ In this project, I will discuss and implement the following architecture consist
 
 ---
 
-## 1. Getting our hands dirty with EKS Distro
+## 1. Getting our hands dirty with EKS Distro and AWS CDK
 
 That’s enough theory. Time to roll up our sleeves and get going with EKS Distro! In this section, we will deploy the following architecture with EKS Distro.
 
@@ -620,7 +622,7 @@ Great job!! If you made it at this point, your EKS Distro cluster is all set. Ne
 
 ---
 
-## 2. Taking EKS Anywhere for a spin
+## 2. Taking EKS Anywhere and AWS CDK for a spin
 
 As already mentioned earlier, EKS Anywhere allows customers to create and operate their Kubernetes clusters on-premises using tooling as their EKS managed clusters on AWS cloud, reducing complexity and cost. It can create and manage Kubernetes clusters on multiple providers. It uses EKS-D (EKS Distro) for bootstrapping the Kubernetes cluster. Each EKS Anywhere cluster is built from a cluster specification file, with the structure of the configuration file based on the target provider for the cluster.  
 
