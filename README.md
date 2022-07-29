@@ -618,7 +618,7 @@ export CONTEXT_EKSD=$(kubectl config view -o jsonpath='{.contexts[0].name}')
 mv $HOME/.kube/config $HOME/.kube/eksd.kubeconfig
 ```
 
-Great job!! If you made it at this point, your EKS Distro cluster is all set. Next, let’s set up an EKS Anywhere cluster within our hybrid EKS environment.
+Great job!! If you made it at this point, your EKS Distro cluster is all set. Next, let’s set up an EKS Anywhere cluster in our hybrid-EKS development environment.
 
 ---
 
