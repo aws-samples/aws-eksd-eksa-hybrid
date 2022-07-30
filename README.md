@@ -1,4 +1,4 @@
-# Building sandbox environments with EKS-D and EKS-A using the AWS CDK to enable applications development for hybrid EKS environments
+# Building sandbox environments with EKS-D and EKS-A using the AWS CDK to enable applications development for Hybrid-EKS  environments
 
 If you've worked extensively with kubernetes projects in the last few years, you may probably have come across a significant number of Kubernetes enterprise-grade and large-scale implementations that have required dealing with hybrid container solutions, often times with a different set of tooling and frameworks, and disparate environments with different APIs and services to build applications on-premises as in the cloud. As a result, you may also have seen customers spending time to re-architect applications for different environments rather than build their applications just once to run anywhere, using the same wide range of popular services and APIs used in the cloud for those applications that need to run on-premises as well.
 
