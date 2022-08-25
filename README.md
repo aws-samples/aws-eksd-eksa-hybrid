@@ -34,7 +34,7 @@ In this project, you'll get to know how to build and automate creation of develo
 
 #### Hybrid EKS development environment architecture
 
-![ekshybridarchitecture](./images/EKShybridarchitecture-v3-numbered.png)
+![ekshybridarchitecture](./images/EKShybridarchitecture-v4.png)
 
 ---
 
