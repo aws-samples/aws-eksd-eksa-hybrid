@@ -1287,12 +1287,6 @@ Now, look into EKS Distro to list all nodes from the cluster created earlier: 1 
 
 ![EKS-A-nodes](./images/EKS-D-nodes.png)
 
-### EKS Distro - Node Details 
-
-And note that container runtimes it not based on docker since kind(kubernetes in docker) utilizes _containerd_ as its container runtime instead.
-
-![EKS-A-node-details](./images/EKS-A-node-details.png)
-
 ### EKS Distro - Node REST API Deployment
  
 ![EKS-A-RESTAPI-deployment](./images/EKS-A-RESTAPI-deployment.png)
