@@ -29,8 +29,8 @@ In this project, you'll get to know how to build and automate creation of develo
 
 1. [Getting our hands dirty with EKS Distro and AWS CDK](#1-getting-our-hands-dirty-with-eks-distro-and-aws-cdk)
 2. [Spinning up an EKS cluster on AWS Cloud](#2-spinning-up-an-eks-cluster-on-aws-cloud)
-3. [Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB](#4-building-and-deploying-a-rest-api-with-nodejs-express-and-amazon-documentdb)
-4. [Monitoring EKS Distro by using EKS Connector](#5-monitoring-eks-distro-and-eks-anywhere-by-using-eks-connector-optional) **(Optional)**
+3. [Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB](#3-building-and-deploying-a-rest-api-with-nodejs-express-and-amazon-documentdb)
+4. [Monitoring EKS Distro by using EKS Connector](#4-monitoring-eks-distro-by-using-eks-connector-optional) **(Optional)**
 
 #### Hybrid EKS development environment architecture
 
@@ -678,7 +678,7 @@ kubectl config get-contexts
 
 ---
 
-## 4. Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB
+## 3. Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB
 
 Once setup process has completely finished, we can move on and get started with the sample application provisioning which consists of an API written in Node.js. This API will be deployed on top of the 3 EKS clusters to consume a Movies collection stored in Amazon DocumentDB and expose that dataset to be consumed by any external client via REST interface. Here is the API architecture diagram:
 
