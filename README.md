@@ -1279,21 +1279,21 @@ After applying the Amazon EKS Connector manifest and role binding YAML files to 
 EKS Connector acts as a proxy and forwards the EKS console requests to the Kubernetes API server on the connected cluster. Upon successful registration,
 you should be able to get the following list on the EKS Console indicating that configuration has successfully completed with the EKS connector installation for the EKS Distro cluster, and, thus, you can now find clusters and their resources within a unified dashboard with visibility across all your Kubernetes environments provided by the EKS Console and the integration with the EKS Connector.
 
-![EKS-console-3-clusters](./images/EKS-console-3-clusters.png)
+![EKS-console-3-clusters](./images/EKS-console-2-clusters.png)
 
-Now, look into EKS Anywhere to list all nodes from the EKS Anywhere cluster created earlier: 1 master and 6 worker nodes, as shown in the EKS Console below:
+Now, look into EKS Distro to list all nodes from the cluster created earlier: 1 master and 6 worker nodes, as shown in the EKS Console below:
 
-### EKS Anywhere - Nodes
+### EKS Distro - Nodes
 
-![EKS-A-nodes](./images/EKS-A-nodes.png)
+![EKS-A-nodes](./images/EKS-D-nodes.png)
 
-### EKS Anywhere - Node Details 
+### EKS Distro - Node Details 
 
 And note that container runtimes it not based on docker since kind(kubernetes in docker) utilizes _containerd_ as its container runtime instead.
 
 ![EKS-A-node-details](./images/EKS-A-node-details.png)
 
-### EKS Anywhere - Node REST API Deployment
+### EKS Distro - Node REST API Deployment
  
 ![EKS-A-RESTAPI-deployment](./images/EKS-A-RESTAPI-deployment.png)
  
