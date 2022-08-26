@@ -111,7 +111,7 @@ export AWS_DEFAULT_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-iden
 Clone the GitHub repository containing the code sample for this example:
 
 ```bash
-git clone https://github.com/aboavent/aws-eksd-eksa-hybrid.git 
+git clone https://github.com/aws-samples/aws-eksd-eksa-hybrid.git 
 ```
 
 ### c. Getting to know the EKS Distro CDK app
