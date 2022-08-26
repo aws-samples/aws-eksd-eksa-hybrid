@@ -471,7 +471,7 @@ aws route53 list-resource-record-sets \
 --hosted-zone-id `aws route53 --output=json list-hosted-zones | jq -r --arg SUBZONENAME "$KOPS_CLUSTER_NAME." '.HostedZones[] | select(.Name==$SUBZONENAME) | .Id' | cut -d/ -f3|cut -d\" -f1`
 ```
 
-More details on how to [Configure DNS for kops](https://kops.sigs.k8s.io/getting_started/aws/#configure-dns) can be helpful in case you need to troubleshoot your installation.
+More details on how to [Configure DNS for kops](https://kops.sigs.k8s.io/getting_started/aws/#configure-dns) and [Using kops with AWS Route53 subdomain](https://github.com/kubernetes/kops/blob/master/docs/examples/kops-test-route53-subdomain.md) can be helpful in case you need to troubleshoot your installation.
 
 ### i. Validating cluster deployment (OPTIONAL)
 
