@@ -651,7 +651,7 @@ Upon cluster creation, you can test if your installation has successfully comple
 
 ![EKS-kubectl-getnodes](./images/EKS-kubectl-getnodes-2.png)
 
-Let’s consolidate the 3 cluster configurations into `$HOME/.kube/config`, which is the first location used by kubectl to find the information it needs to choose a cluster and communicate with the API server of that cluster. As such, run the following commands:
+Let’s consolidate the 2 cluster configurations into `$HOME/.kube/config`, which is the first location used by kubectl to find the information it needs to choose a cluster and communicate with the API server of that cluster. As such, run the following commands:
 
 ```bash
 export CONTEXT_EKS=$(kubectl config view -o jsonpath='{.contexts[0].name}')
