@@ -656,7 +656,7 @@ Let’s consolidate the 2 cluster configurations into `$HOME/.kube/config`, whic
 ```bash
 export CONTEXT_EKS=$(kubectl config view -o jsonpath='{.contexts[0].name}')
 mv $HOME/.kube/config $HOME/.kube/$EKS_CLUSTER_NAME.kubeconfig
-export KUBECONFIG=$HOME/.kube/eksd.kubeconfig:$HOME/.kube/eksa.kubeconfig:$HOME/.kube/$EKS_CLUSTER_NAME.kubeconfig
+export KUBECONFIG=$HOME/.kube/eksd.kubeconfig:$HOME/.kube/$EKS_CLUSTER_NAME.kubeconfig
 kubectl config view --merge --flatten > $HOME/.kube/config
 ```
 
