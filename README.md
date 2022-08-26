@@ -110,7 +110,8 @@ export AWS_DEFAULT_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-iden
 Clone the GitHub repository containing the code sample for this example:
 
 ```bash
-git clone https://github.com/aboavent/aws-eksd-eksa-hybrid.git 
+git clone https://github.com/aws-samples/aws-hybrid-eksd-dev.git
+export HOME_REPO=$HOME/environment/aws-hybrid-eksd-dev
 ```
 
 ### c. Getting to know the EKS Distro CDK app
@@ -309,7 +310,7 @@ Additionally, you can use either `CDK_DEFAULT_ACCOUNT` and `CDK_DEFAULT_REGION` 
 First off, ensure AWS CDK is installed and [bootstrapped](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html). The CDK uses the same supporting infrastructure for all projects within a region, so you only need to run the bootstrap command once in any region in which you create CDK stacks. In this example, let us use `us-west-2` as the preferred region. Also, `npm install` will install all the latest CDK modules under the node_modules directory according to the definitions and dependencies declared in the `package.json` file. 
 
 ```bash
-cd ~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro
+cd $HOME_REPO/cdk/cdk-eksdistro
 npm install
 cdk bootstrap
 ```
@@ -325,7 +326,7 @@ The `/src/config.sh` file is used as [user-data](https://docs.aws.amazon.com/AWS
 - create the cluster configuration
 - wait for the cluster to come up until deployment is finished 
 
-This script is located in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/src/config.sh`.
+This script is located in your AWS Cloud9 environment at `$HOME_REPO/cdk/cdk-eksdistro/src/config.sh`.
 
 You should change the following environment variables to point to your environment configuration accordingly before deploying the CDK app. 
 
@@ -354,7 +355,7 @@ More details on EKS-D releases can be found [here](https://distro.eks.amazonaws.
 
 [Context values](https://docs.aws.amazon.com/cdk/v2/guide/context.html) are key-value pairs that can be associated with an AWS CDK app, stack, or construct, and they can be provided in different ways.
 
-In this example, there are some key-values used to control the way application will deploy the AWS Route 53 parent and subdomain depending on whether or not a multi AWS account setup will be utilized to deploy the EKS Distro cluster through kOps. This AWS CDK configuration file is located in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/cdk.context.json`
+In this example, there are some key-values used to control the way application will deploy the AWS Route 53 parent and subdomain depending on whether or not a multi AWS account setup will be utilized to deploy the EKS Distro cluster through kOps. This AWS CDK configuration file is located in your AWS Cloud9 environment at `$HOME_REPO/cdk/cdk-eksdistro/cdk.context.json`
 
 That said, you may indicate whether or not you will be deploying a parent hosted zone in a different account than the child hosted zone. If so, set `"crossAccountRoute53": true` and run AWS CDK app described in the section below twice: 
  1) At first, on the parent account by changing the `"IsParentAccount": true`
@@ -764,7 +765,7 @@ sudo cp mongosh-1.1.7-linux-x64/bin/mongosh /usr/local/bin/
 
 ```bash
 ## Amazon DocumentDB setup
-cd $HOME/environment/aws-eksd-eksa-hybrid/documentdb 
+cd $HOME_REPO/documentdb 
 chmod +x setup_documentdb.sh
 source setup_documentdb.sh
 ```
@@ -779,7 +780,7 @@ As previously shown in the [overall architeture](#overall-eks-hybrid-environment
 
 ```bash
 ## VPC peering configuration
-cd $HOME/environment/aws-eksd-eksa-hybrid/documentdb 
+cd $HOME_REPO/documentdb 
 chmod +x vpc-peering-setup.sh.sh
 source vpc-peering-setup.sh.sh
 ```
@@ -837,7 +838,7 @@ Now, run the command below to populate the Sample DB Movies Collection to load w
 
 ```bash
 ## Create DB Movies collection
-mongosh $DBCLUSTER_CONNECTION_STRING --file $HOME/environment/aws-eksd-eksa-hybrid/documentdb/dbmovies.js
+mongosh $DBCLUSTER_CONNECTION_STRING --file $HOME_REPO/documentdb/dbmovies.js
 ```
 
 ![mongosh-EKS-clusters](./images/mongosh-documentdb-load.png)
@@ -992,7 +993,7 @@ module.exports = router;
 Run the following script in the AWS Cloud9 terminal to create the docker container
 
 ```bash
-cd $HOME/environment/aws-eksd-eksa-hybrid/node-rest-api 
+cd $HOME_REPO/node-rest-api 
 chmod +x build_and_push.sh
 source build_and_push.sh node-rest-api $DBCLUSTER_CONNECTION_STRING_ESCAPE
 ```
@@ -1074,7 +1075,7 @@ sed -i "s|YOUR-CONTAINER-IMAGE|$fullname|g" ./k8s/node-rest-api-deployment.yaml
 
 #### b.2 - Deploying the Node REST API 
  
-Here is the kubernetes service configuration to deploy a REST API in Node.js on top of the EKS environments we just created. It exposes the Movies collection created in Amazon DocumentDB. File is located at **`~/environment/aws-eksd-eksa-hybrid/node-rest-api/k8s/node-rest-api-deployment.yaml`**
+Here is the kubernetes service configuration to deploy a REST API in Node.js on top of the EKS environments we just created. It exposes the Movies collection created in Amazon DocumentDB. File is located at **`$HOME_REPO/node-rest-api/k8s/node-rest-api-deployment.yaml`**
  
 <details>
   <summary>Expand to explore the REST API deployment configuration on EKS</summary> 
@@ -1125,10 +1126,10 @@ spec:
  
 ```bash
 ## EKS Distro
-kubectl apply --context $CONTEXT_EKSD -f $HOME/environment/aws-eksd-eksa-hybrid/node-rest-api/k8s/node-rest-api-deployment.yaml
+kubectl apply --context $CONTEXT_EKSD -f $HOME_REPO/node-rest-api/k8s/node-rest-api-deployment.yaml
  
 ## EKS
-kubectl apply --context $CONTEXT_EKS -f $HOME/environment/aws-eksd-eksa-hybrid/node-rest-api/k8s/node-rest-api-deployment.yaml
+kubectl apply --context $CONTEXT_EKS -f $HOME_REPO/node-rest-api/k8s/node-rest-api-deployment.yaml
 ``` 
 ![node-rest-api-apply-deployment](./images/node-rest-api-apply-deployment.png)
 
@@ -1303,14 +1304,14 @@ To remove the three Amazon EKS clusters created throughout this example, run the
 
 ```bash
 ## Clean up Amazon DocumentDB cluster
-cd ~/environment/aws-eksd-eksa-hybrid/documentdb
+cd $HOME_REPO/documentdb
 chmod +x remove_documentdb.sh
 ./remove_documentdb.sh
 chmod +x vpc-peering-destroy.sh
 ./vpc-peering-destroy.sh
  
 ## Clean up EKS Distro
-cd ~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro
+cd $HOME_REPO/cdk/cdk-eksdistro
 ssh -i cdk-eksd-key-pair.pem ec2-user@X.X.X.X ./delete_cluster.sh
 export EKSCONNECTOR_CLUSTER_NAME=eksdistro
 eksctl deregister cluster --name $EKSCONNECTOR_CLUSTER_NAME
