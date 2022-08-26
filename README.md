@@ -1059,8 +1059,8 @@ As previously shown in the [overall architeture](#overall-eks-hybrid-environment
 ```bash
 ## VPC peering configuration
 cd $HOME/environment/aws-eksd-eksa-hybrid/documentdb 
-chmod +x vpc-peering-setup.sh.sh
-source vpc-peering-setup.sh.sh
+chmod +x vpc-peering-setup.sh
+source vpc-peering-setup.sh
 ```
 
 ![VPC_peering_connections](./images/VPC_peering_connections.png)
