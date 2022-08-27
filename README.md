@@ -1060,7 +1060,7 @@ As previously shown in the [overall architeture](#overall-eks-hybrid-environment
 ## VPC peering configuration
 cd $HOME/environment/aws-eksd-eksa-hybrid/documentdb 
 chmod +x vpc-peering-setup.sh
-source vpc-peering-setup.sh
+source vpc-peering-setup.sh $CONTEXT_EKSD $EKS_CLUSTER_NAME
 ```
 
 ![VPC_peering_connections](./images/VPC_peering_connections.png)
