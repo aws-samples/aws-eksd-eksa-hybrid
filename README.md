@@ -1305,10 +1305,10 @@ To remove the three Amazon EKS clusters created throughout this example, run the
 ```bash
 ## Clean up Amazon DocumentDB cluster
 cd $HOME_REPO/documentdb
-chmod +x remove_documentdb.sh
-./remove_documentdb.sh
 chmod +x vpc-peering-destroy.sh
 ./vpc-peering-destroy.sh
+chmod +x remove_documentdb.sh
+./remove_documentdb.sh
  
 ## Clean up EKS Distro
 cd $HOME_REPO/cdk/cdk-eksdistro
