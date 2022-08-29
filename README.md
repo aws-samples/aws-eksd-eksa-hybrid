@@ -1286,7 +1286,7 @@ Now, look into EKS Distro to list all nodes from the cluster created earlier: 1 
 
 ### EKS Distro - Nodes
 
-![EKS-A-nodes](./images/EKS-D-nodes.png)
+![EKS-D-nodes](./images/EKS-D-nodes.png)
 
 ### EKS Distro - Node REST API Deployment
  
