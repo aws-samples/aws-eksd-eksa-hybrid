@@ -520,9 +520,9 @@ Output
 
 or through the AWS Console as follows
 
-![ASG](./images/EKSD-DNS-records-highlighted.png)
+![ASG](./images/EKSD-DNS-records.png)
 
-In the example above, the output is the public IP assigned to the master node. Alternatively, we can send a command to our master node via ssh which will output the same IP address as on the picture above, indicating that the Route 53 DNS resource record and the master node are working as expected:
+In the example above, the record name `api.eksd.aboavent.net` has the public IP assigned to the master node. Alternatively, we can send a command to our master node via ssh which will output the same IP address for this record on the picture above, indicating that the Route 53 DNS resource record and the master node are properly working:
 
 ```bash
 ssh -i ~/.ssh/id_rsa ubuntu@api.$KOPS_CLUSTER_NAME "ec2metadata --public-ipv4"
