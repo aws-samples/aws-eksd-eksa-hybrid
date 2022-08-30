@@ -1,11 +1,11 @@
-# Building sandbox environments with EKS-D and EKS-A using the AWS CDK to enable application development for hybrid EKS  environments
+# Building sandbox environments with EKS Distro using the AWS CDK to enable application development for hybrid EKS environments
 
 If you've worked extensively with kubernetes projects in the last few years, you may probably have come across a significant number of Kubernetes enterprise-grade and large-scale implementations that have required dealing with hybrid container solutions, often times with a different set of tooling and frameworks, and disparate environments with different APIs and services to build applications on-premises as in the cloud. As a result, you may also have seen customers spending time to re-architect applications for different environments rather than build their applications just once to run anywhere, using the same wide range of popular services and APIs used in the cloud for those applications that need to run on-premises as well.
 
 
-## EKS Anywhere & EKS Distro coming to the rescue
+## EKS Distro coming to the rescue
  
-By recognizing this trend, AWS launched on-premises container offerings such as EKS-D and EKS-A, which are helping those customers struggling to manage their hybrid kubernetes environments, but as they are relatively new deployment options, they might experience challenges while adopting them for software delivery. In addition, production deployments with either of them will most likely be targeted at on-premises environments such as VMware or bare metal servers, meaning that typical infrastructure as code software tools (e.g., Terraform, AWS CDK, etc.), that enables creation, changing, and improvement of cloud infrastructure automation, wouldn't be a fit to address this scenario. Nevertheless, both EKS-D and EKS-A are still great options to enable application development for hybrid kubernetes environments standardized on Amazon EKS, as they can be seamlessly automated by using software development frameworks to define cloud application resources needed to provision development and test environments on the AWS Cloud. Also, this approach allows the same experience for developers when creating, testing, and running their application regardless of the environment in which they will deploy their applications. With this in mind, in this project you will learn how to accomplish this by using AWS CDK to automate creation of EKS-D and EKS-A sandbox environments to streamline hybrid kubernetes application development based on EKS. 
+By recognizing this trend, AWS launched on-premises container offerings such as EKS-D and EKS-A, which are helping those customers struggling to manage their hybrid kubernetes environments, but as they are relatively new deployment options, they might experience challenges while adopting them for software delivery. In addition, production deployments with either of them will most likely be targeted at on-premises environments such as VMware or bare metal servers, meaning that typical infrastructure as code software tools (e.g., Terraform, AWS CDK, etc.), that enables creation, changing, and improvement of cloud infrastructure automation, wouldn't be a fit to address this scenario. Nevertheless, EKS Distro is still a great option to enable application development for hybrid kubernetes environments, which in turn can be seamlessly automated by using software development frameworks to define cloud application resources needed to provision development and test environments on the AWS Cloud. Therefore, this approach allows the same experience for developers when creating, testing, and running their application regardless of the environment utilized, i.e., development, testing, acceptance, and production environments, in which they may deploy them. With this in mind, in this project you will learn how to accomplish this by using AWS CDK to automate building of EKS-D environments to streamline hybrid kubernetes application development based on EKS. 
 
 
 **EKS Distro** is an installable set of the same open source Kubernetes components used by Amazon EKS, tested for interoperability, security, and scale, which includes the same components that form the Kubernetes control plane(e.g. API Server, CoreDNS, etcd, scheduler, etc) and data plane(kubelet, CNI, kubectl, etc) that is freely available when public Kubernetes releases occur. We all know there is a set of related components that work together to form the larger Kubernetes platform. Some of these components, like etcd, and CoreDNS, are actually separate open source projects and must be tested for interoperability and version compatibility. In other words, AWS puts together a lot of work to select the right Kubernetes version, validate dependencies to provide the security, stability, and operational excellence to reduce the complexity of Kubernetes operations that our customers need for a smoother experience and faster project implementations.
@@ -23,19 +23,18 @@ In summary, the way to think about these 2 offerings is that EKS Distro gives cu
 ## A 10,000-foot view of the Hybrid-EKS development environment architecture
 
 
-In this project, you'll get to know how to build and automate creation of development and prototype environments for hybrid software delivery using the [AWS CDK](https://aws.amazon.com/cdk/) to automate EKS Distro and EKS Anywhere environments provisioning for development purposes, allowing a seamless experience while standing up and standardizing kubernetes environments and applications deployment on top of EKS. It was designed to explore ways and best practices to abstract the challenges and complexities of deploying hybrid-EKS development infrastructure targeted at DevOps teams, allowing repeatable workload development and testing which can be easily integrated with existing CI/CD pipelines using a simple and consistent method, as needed. The approaches, which are thoroughly explored throughout this example, can then be used by developers across an enterprise and diverse teams in a repeatable and predictable way. For operations teams, they will not only simplify deployment of “well-architected” and hybrid-EKS development environments aiming the automation of software delivery using DevOps techniques and best practices with the AWS CDK, but also consolidate administration and monitoring of all EKS clusters, from a single pane of glass, by utilizing the EKS Console, through the integration with [EKS Connector](https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html), as a central management platform.
+In this project, you'll get to know how to build and automate creation of development and prototype environments for hybrid software delivery using the [AWS CDK](https://aws.amazon.com/cdk/) to automate EKS Distro environment provisioning for development purposes, allowing a seamless experience while standing up and standardizing kubernetes environments and application deployment on top of EKS. It was designed to explore ways and best practices to abstract the challenges and complexities of deploying hybrid-EKS development infrastructure targeted at DevOps teams, allowing repeatable workload development and testing which can be easily integrated with existing CI/CD pipelines using a simple and consistent method, as needed. The approaches, which are thoroughly explored throughout this example, can then be used by developers across an enterprise and diverse teams in a repeatable and predictable way. For operations teams, they will not only simplify deployment of “well-architected” and hybrid-EKS development environments aiming the automation of software delivery using DevOps techniques and best practices with the AWS CDK, but also consolidate administration and monitoring of all EKS clusters, from a single pane of glass, by utilizing the EKS Console, through the integration with [EKS Connector](https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html), as a central management platform.
 
 ### Content
 
 1. [Getting our hands dirty with EKS Distro and AWS CDK](#1-getting-our-hands-dirty-with-eks-distro-and-aws-cdk)
-2. [Taking EKS Anywhere and AWS CDK for a spin](#2-taking-eks-anywhere-and-aws-cdk-for-a-spin)
-3. [Spinning up an EKS cluster on AWS Cloud](#3-spinning-up-an-eks-cluster-on-aws-cloud)
-4. [Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB](#4-building-and-deploying-a-rest-api-with-nodejs-express-and-amazon-documentdb)
-5. [Monitoring EKS Distro and EKS Anywhere by using EKS Connector](#5-monitoring-eks-distro-and-eks-anywhere-by-using-eks-connector-optional) **(Optional)**
+2. [Spinning up an EKS cluster on AWS Cloud](#2-spinning-up-an-eks-cluster-on-aws-cloud)
+3. [Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB](#3-building-and-deploying-a-rest-api-with-nodejs-express-and-amazon-documentdb)
+4. [Monitoring EKS Distro by using EKS Connector](#4-monitoring-eks-distro-by-using-eks-connector-optional) **(Optional)**
 
-#### Overall Hybrid-EKS development environment architecture
+#### Hybrid EKS development environment architecture
 
-![ekshybridarchitecture](./images/EKShybridarchitecture-v3-numbered.png)
+![ekshybridarchitecture](./images/EKShybridarchitecture-v4.png)
 
 ---
 
@@ -111,7 +110,8 @@ export AWS_DEFAULT_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-iden
 Clone the GitHub repository containing the code sample for this example:
 
 ```bash
-git clone https://github.com/aws-samples/aws-eksd-eksa-hybrid.git 
+git clone https://github.com/aws-samples/aws-hybrid-eksd-dev-sandbox.git
+export HOME_REPO=$HOME/environment/aws-hybrid-eksd-dev-sandbox
 ```
 
 ### c. Getting to know the EKS Distro CDK app
@@ -310,7 +310,7 @@ Additionally, you can use either `CDK_DEFAULT_ACCOUNT` and `CDK_DEFAULT_REGION` 
 First off, ensure AWS CDK is installed and [bootstrapped](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html). The CDK uses the same supporting infrastructure for all projects within a region, so you only need to run the bootstrap command once in any region in which you create CDK stacks. In this example, let us use `us-west-2` as the preferred region. Also, `npm install` will install all the latest CDK modules under the node_modules directory according to the definitions and dependencies declared in the `package.json` file. 
 
 ```bash
-cd ~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro
+cd $HOME_REPO/cdk/cdk-eksdistro
 npm install
 cdk bootstrap
 ```
@@ -326,7 +326,7 @@ The `/src/config.sh` file is used as [user-data](https://docs.aws.amazon.com/AWS
 - create the cluster configuration
 - wait for the cluster to come up until deployment is finished 
 
-This script is located in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/src/config.sh`.
+This script is located in your AWS Cloud9 environment at `$HOME_REPO/cdk/cdk-eksdistro/src/config.sh`.
 
 You should change the following environment variables to point to your environment configuration accordingly before deploying the CDK app. 
 
@@ -355,7 +355,7 @@ More details on EKS-D releases can be found [here](https://distro.eks.amazonaws.
 
 [Context values](https://docs.aws.amazon.com/cdk/v2/guide/context.html) are key-value pairs that can be associated with an AWS CDK app, stack, or construct, and they can be provided in different ways.
 
-In this example, there are some key-values used to control the way application will deploy the AWS Route 53 parent and subdomain depending on whether or not a multi AWS account setup will be utilized to deploy the EKS Distro cluster through kOps. This AWS CDK configuration file is located in your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro/cdk.context.json`
+In this example, there are some key-values used to control the way application will deploy the AWS Route 53 parent and subdomain depending on whether or not a multi AWS account setup will be utilized to deploy the EKS Distro cluster through kOps. This AWS CDK configuration file is located in your AWS Cloud9 environment at `$HOME_REPO/cdk/cdk-eksdistro/cdk.context.json`
 
 That said, you may indicate whether or not you will be deploying a parent hosted zone in a different account than the child hosted zone. If so, set `"crossAccountRoute53": true` and run AWS CDK app described in the section below twice: 
  1) At first, on the parent account by changing the `"IsParentAccount": true`
@@ -471,7 +471,7 @@ aws route53 list-resource-record-sets \
 --hosted-zone-id `aws route53 --output=json list-hosted-zones | jq -r --arg SUBZONENAME "$KOPS_CLUSTER_NAME." '.HostedZones[] | select(.Name==$SUBZONENAME) | .Id' | cut -d/ -f3|cut -d\" -f1`
 ```
 
-More details on how to [Configure DNS for kops](https://kops.sigs.k8s.io/getting_started/aws/#configure-dns) can be helpful in case you need to troubleshoot your installation.
+More details on how to [Configure DNS for kops](https://kops.sigs.k8s.io/getting_started/aws/#configure-dns) and [Using kops with AWS Route53 subdomain](https://github.com/kubernetes/kops/blob/master/docs/examples/kops-test-route53-subdomain.md) can be helpful in case you need to troubleshoot your installation.
 
 ### i. Validating cluster deployment (OPTIONAL)
 
@@ -618,293 +618,17 @@ export CONTEXT_EKSD=$(kubectl config view -o jsonpath='{.contexts[0].name}')
 mv $HOME/.kube/config $HOME/.kube/eksd.kubeconfig
 ```
 
-Great job!! If you made it at this point, your EKS Distro cluster is all set. Next, let’s set up an EKS Anywhere cluster in our hybrid-EKS development environment.
+Great job!! If you made it at this point, your EKS Distro cluster is all set. Next, let’s move forward to the next step which is creating an EKS cluster on AWS cloud.
 
 ---
 
-## 2. Taking EKS Anywhere and AWS CDK for a spin
-
-As already mentioned earlier, EKS Anywhere allows customers to create and operate their Kubernetes clusters on-premises using tooling as their EKS managed clusters on AWS cloud, reducing complexity and cost. It can create and manage Kubernetes clusters on multiple providers. It uses EKS-D (EKS Distro) for bootstrapping the Kubernetes cluster. Each EKS Anywhere cluster is built from a cluster specification file, with the structure of the configuration file based on the target provider for the cluster.  
-
-In this section, you’ll learn how to easily create an EKS Anywhere cluster by leveraging AWS CDK that will stand up a cluster for development purposes using the docker provider. The following architecture will be deployed: 
-
-
-![EKS-A-architecture](./images/EKS-A-architecture-v2.png)
-
-
-### Setup
-
-- a. [Getting to know the EKS Anywhere CDK app](#a-getting-to-know-the-eks-anywhere-cdk-app)
-- b. [Building and deploying the EKS Anywhere CDK app](#b-building-and-deploying-the-eks-anywhere-cdk-app)
-- c. [EKS Anywhere under the hoods](#c-eks-anywhere-under-the-hoods)
-    - [1-Accessing the EKS Anywhere EC2 instance](#c1---accessing-the-eks-anywhere-ec2-instance)
-    - [2-Understanding the Bootstrap Cluster](#c2---understanding-the-bootstrap-cluster-optional) **(OPTIONAL)**
-    - [3-Understanding the Workload Cluster](#c3---understanding-the-workload-cluster-optional) **(OPTIONAL)**
-- d. [Scaling out the EKS Anywhere cluster](#d-scaling-out-the-eks-anywhere-cluster-optional) **(OPTIONAL)**
-
-
-### a. Getting to know the EKS Anywhere CDK app
-
-In the previous section, while setting up the EKS Distro cluster, we used the `/src/config.sh` file as [user-data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) to install dependencies, add environment variables, etc. Again, we'll be using the same approach for the EKS-A cluster installation, but this time, this script will install the following tools and dependencies that must be in place to complete the EKS Anywhere setup accordingly as per [documentation](https://anywhere.eks.amazonaws.com/docs/getting-started/install/).
-
- - [Kubernetes CLI](https://kubernetes.io/docs/reference/kubectl/kubectl/) (kubectl)
- - [docker](https://docs.docker.com/get-docker/)
- - [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) 
- - [eksctl anywhere](https://eksctl.io/usage/eksctl-anywhere/) plugin
-
-This repository contains CDK source code with 1 stack(**`CdkEksAnywhereStack`**) to automate EKS Anywhere deployment. Under the `./cdk/cdk-eksanywhere/lib` folder, open the `cdk-eksanywhere-stack.ts` file and let us explore the following different CDK constructs.
-
-**CdkEksAnywhereStack**
-
-<details>
-  <summary>A key pair to be assigned to the EC2 instance for accessing from AWS Cloud9 environment</summary>
-
-```typescript
-    const key = new KeyPair(this, 'KeyPair', {
-       name: 'cdk-eksa-key-pair',
-       description: 'Key Pair created with CDK Deployment',
-    });
-    key.grantReadOnPublicKey
-```
-</details>
-
-<details>
-  <summary>A security group to allow inbound connection via SSH (port 22) and kubectl</summary>
-
-```typescript
-    const vpc = ec2.Vpc.fromLookup(this, 'DefaultVPC', { isDefault: true });
-
-    const securityGroup = new ec2.SecurityGroup(this, 'SecurityGroup', {
-      vpc,
-      description: 'Allow SSH (TCP port 22) in and kubectl connection to the EKS Anywhere cluster',
-      allowAllOutbound: true
-    });
-    securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(22), 'Allow SSH Access')
-    securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcpRange(30000,50000), 'Allow kubectl Access')
-
-    const role = new iam.Role(this, 'ec2-EKSA-Role', {
-      assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com')
-    })
-```
-</details>
-
-
-<details>
-  <summary>An EC2 instance using the default VPC with the required dependencies to install EKS Anywhere</summary>
- 
-```typescript
-    const ami = new ec2.AmazonLinuxImage({
-      generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
-      cpuType: ec2.AmazonLinuxCpuType.X86_64
-    });
-    
-    const ec2Instance = new ec2.Instance(this, 'Instance', {
-      vpc,
-      instanceType: ec2.InstanceType.of(ec2.InstanceClass.M5, ec2.InstanceSize.XLARGE2),
-      machineImage: ami,
-      init: ec2.CloudFormationInit.fromElements(
-          ec2.InitCommand.shellCommand('sudo yum update -y'),
-          ec2.InitCommand.shellCommand('sudo yum install git -y'),
-          ec2.InitCommand.shellCommand('sudo yum install jq -y')
-      ),
-      blockDevices: [
-          {
-            deviceName: '/dev/xvda',
-            volume: ec2.BlockDeviceVolume.ebs(100),
-          }
-      ],     
-      securityGroup: securityGroup,
-      keyName: key.keyPairName,
-      role: role
-    });
-```
-</details>
-
-
-<details>
-  <summary>User Data to run on first load of the EC2 instance</summary>
-
-```typescript
-    const asset = new Asset(this, 'Asset', { path: path.join(__dirname, '../src/config.sh') });
-    const localPath = ec2Instance.userData.addS3DownloadCommand({
-      bucket: asset.bucket,
-      bucketKey: asset.s3ObjectKey,
-    });
-
-    ec2Instance.userData.addExecuteFileCommand({
-      filePath: localPath,
-      arguments: '--verbose -y'
-    });
-    asset.grantRead(ec2Instance.role);
-```
-</details>
- 
-### b. Building and deploying the EKS Anywhere CDK app
-
-You'll need to deploy the EKS Anywhere CDK app to create and deploy a development cluster with EKS Anywhere. The EC2 instance provisioned by this stack contains a script `/src/config.sh` that will be used to automate the generation of cluster configurations and deployment. Before deploying the EKS Anywhere stack(**CdkEksAnywhereStack**), you may change its cluster name, if needed, by setting up the `CLUSTER_NAME` environment variable, which in turn, will be used to properly register the EKS Anywhere cluster with the same name in the EKS Console during EKS Connector setup. 
-
-This script is located at your AWS Cloud9 environment at `~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksanywhere/src/config.sh`
-
-![EKS-A-config-script-optional](./images/EKS-A-config-script-optional.png)
-
-Additionally, you're **REQUIRED** to change the `IAM_ARN` environment variable, found within the same script, to define an IAM user or role to be utilized while setting up the EKS Connector to be able to view the EKS Anywhere resources on the Amazon EKS console.
-
-![EKS-A-config-script-IAM-ARN](./images/EKS-A-config-script-IAM-ARN.png)
-
-After changing these parameters above, run the following on your AWS Cloud9 terminal to deploy the EKS Anywhere through the AWS CDK app as required:
-
-```bash
-cd ~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksanywhere
-npm install
-npm run build
-cdk deploy
-```
-> Type __Y__ to confirm stack deployment
-
-
-![EKSD-kopsvalidatecluster](./images/EKSA-cdkdeploy.png)
-
-
-Please note that after stack deployment, which takes about **`2-3 minutes`** to complete, the typical EKS Anywhere installation takes around **`10 minutes`** to be completed. You'll learn in the section below how to inspect the logs while cluster is being created. 
-
-
-### c. EKS Anywhere under the hoods
-
-#### c.1 - Accessing the EKS Anywhere EC2 instance
-
-#### Output
-
-- `CdkEksAnywhereStack.DownloadKeyCommand`: The command needed to download the private key that was created.
-- `CdkEksAnywhereStack.EC2PublicIPaddress`: The EC2 public IP address
-- `CdkEksAnywhereStack.EKSAnywherekubeconfigscpcommand`: The command used to copy EKS Anywhere kubeconfig file to the AWS Cloud9 environment to be able to connect to the cluster using kubectl from the AWS Cloud9 instance.
-- `CdkEksAnywhereStack.sshcommand`: The command used to connect to the instance.
-
-![CdkEksAnywhereStack-output-blurred](./images/CdkEksAnywhereStack-output-blurred.png)
-
-#### Keys and Access
-
-A Key Pair is created as part of this project. The public key will be installed as an authorized key in the EC2 instance. To connect to the instance:
-
-1. Download the private key from aws secretsmanager:
-
-    ```bash
-    # This will download the key as `cdk-eksa-key-pair.pem` and grant permissions.
-    aws secretsmanager get-secret-value --secret-id ec2-ssh-key/cdk-eksa-key-pair/private --query SecretString --output text > cdk-eksa-key-pair.pem && chmod 400 cdk-eksa-key-pair.pem
-    ```
-
-2. SSH to the instance using the command provided from the stack's output `CdkEksAnywhereStack.sshcommand`.
-
-    For example:
-
-    ```bash
-    ssh -i cdk-eksa-key-pair.pem -o IdentitiesOnly=yes ec2-user@X.X.X.X
-    ```
-
-    _Find the command for your specific instance in the stack's output._
-
-![CdkAnywhereStack-ssh](./images/CdkAnywhereStack-ssh.png)
-
-
-Similarly as in the previous section, you can check the cloud-init output log file `/var/log/cloud-init-output.log` to keep tracking of the EKS Anywhere setup and initialization. 
-
-```bash
-    sudo tail -f /var/log/cloud-init-output.log
-```
-
-![EKSA-cloud-init-output](./images/EKSA-cloud-init-output.png)
-
-
-#### c.2. - Understanding the Bootstrap cluster (OPTIONAL)
-
-As a result of running `eksctl anywhere create cluster`, EKS Anywhere uses [kind](https://sigs.k8s.io/kind) (Kubernetes in docker), a tool for running local Kubernetes clusters using Docker container “nodes”, to run a cluster on the local machine that will act as a bootstrap cluster. Please note that while kind uses docker on the local host machine, it uses CRI / containerd "inside" the nodes and does not use dockershim, meaning that workloads run against containerd rather than docker. 
-
-The key steps for the bootstrap cluster preparation consist of pulling the kind node image based on EKS Distro, preparing nodes, writing configuration, starting control-plane, installing CNI and StorageClass. 
-
-After finishing bootstrap cluster installation, Cluster API Provider Docker([CAPD](https://github.com/kubernetes-sigs/cluster-api/tree/main/test/infrastructure/docker)) and Cluster API (CAPI) management is added to the bootstrap cluster to direct the creation of the workload cluster. The [Kubernetes Cluster API](https://github.com/kubernetes-sigs/cluster-api) (CAPI) is a Kubernetes sub-project focused on providing declarative APIs and tooling to simplify provisioning, upgrading, and operating multiple Kubernetes clusters whereas CAPD is a reference implementation of an infrastructure provider for the Cluster API project using Docker, which is intended for development purposes only. The bootstrap cluster includes all the components and Custom Resource Definition (CRD’s) of CAPI and CAPD (e.g., dockerclusters, dockermachines, machines, etc). During EKS Anywhere cluster installation, you can find these components by running the commands as per instructions below:
-
-![EKS-A-bootstrap-cluster-components](./images/EKS-A-bootstrap-cluster-components.png)
-
-
-#### c.3. - Understanding the workload cluster (OPTIONAL)
-
-Proceeding on this track, after the temporary bootstrap cluster is fully configured on the local machine, it starts off the creation and set up (configure the control plane and worker nodes) of a _**workload cluster**_ with Docker provider and EKS Distro, and adds networking(CNI), storage class, and the Cluster API provider Docker([CAPD](https://github.com/kubernetes-sigs/cluster-api/tree/main/test/infrastructure/docker)) in preparation for it to take over management of the cluster after the cluster creation is completed and the bootstrap cluster can be destroyed.
-
-EKS Anywhere leverages CAPI under the covers, but rather than using CAPI directly with the `clusterctl`(a CLI tool to handle the lifecycle of a Cluster API [management cluster](https://cluster-api.sigs.k8s.io/reference/glossary.html#management-cluster)) command to manage and perform any sort of operations on the workload cluster, it relies on eksctl anywhere to streamline and automate workload cluster management for the permanent cluster (a.k.a workload cluster), including calling `clusterctl` under the hood.
-
-Therefore, once the infrastructure provisioning is properly finished and the CAPI service is running on the workload cluster, then the bootstrap cluster moves the CAPI objects over to the workload cluster(done internally with the `clusterctl` command), so that the workload cluster can take over responsibilities for running the components needed to manage itself. Moreover, the cluster creation process will add Kubernetes CRDs and other add-ons that are specific to EKS Anywhere. That configuration is applied directly to the workload cluster. After the workload cluster is properly set up, including the CAPI service running on top of it, the bootstrap cluster is no longer needed, and, thus, it is deleted. Upon bootstrap cluster removal, EKS Anywhere CAPI management is now being fulfilled from the workload cluster instead of the bootstrap cluster.
-
-At this point, with a fully functional workload cluster, EKS Anywhere is ready to run workloads and accept requests to change, update, or upgrade the cluster itself by using the eksa-controller and specific CRD’s provisioned on it for managing the overall cluster. 
-
-```bash
-kubectl get dockerclusters -A
-kubectl get dockermachines -A
-kubectl get machines -A
-kubectl get pods -A | grep cap
-kubectl get crd -A
-```
-
-![EKS-A-get-dockerclusters](./images/EKS-A-get-dockerclusters.png)
-
-![EKS-A-get-crd](./images/EKS-A-get-crd.png)
-
-Also, you can check that the expected number of cluster nodes(master and worker nodes) are up and running by executing the `kubectl get nodes` command to show that they are **`Ready`**. You may notice that worker nodes are named according to the format `$CLUSTERNAME-md-0`:
-
-
-![EKS-A-kubectl-getnodes](./images/EKS-A-kubectl-getnodes.png)
-
-Also, you can run `docker images` to find the images created during initial setup for this environment as follows:
-
-![EKS-A-dockerimages](./images/EKS-A-dockerimages.png)
-
-### d. Scaling out the EKS Anywhere cluster (OPTIONAL)
-
-You can scale out the cluster by increasing the number of control plane and/or worker node groups under the Cluster specification just created by the AWS CDK app after generating the **`$CLUSTER_NAME.yaml`** file through the `eksctl anywhere generate clusterconfig` command in the userdata. Please make a change to the cluster config file at `$HOME/$CLUSTER_NAME.yaml` as per below:
-
-![EKS-A-cluster-config-scale-highlighted](./images/EKS-A-cluster-config-scale-highlighted.png)
-
-
-In this example, we increased **`workerNodeGroupConfigurations`** from _**1 to 6**_ to horizontally scale the EKS-A data plane. Additionally, you could also change **controlPlaneConfiguration** and/or **externalEtcdConfiguration** count number to horizontally scale the control plane, however in case you’d like to proceed with such changes, you’d would have to scale your control plane in odd numbers like 3, 5, 7, and so on.
-
-Once we are done with configuration updates, we can apply the changes to our EKS-A cluster. Since we are adding two additional worker nodes, the existing nodes won’t be affected. You must wait about 5 minutes for this operation to complete.
-
-```bash
-eksctl anywhere upgrade cluster -f $CLUSTER_NAME.yaml
-```
-
-Here is the output you should see after upgrading your cluster:
-
-![EKS-A-upgrade-cluster](./images/EKS-A-upgrade-cluster.png)
-
-Run `kubectl get nodes` again to list the new cluster configuration after upgrading it. You should get the following output listing _**1 master and 6 worker nodes**_ as shown below:
-
-![EKS-A-upgrade-get-nodes](./images/EKS-A-upgrade-get-nodes.png)
-
-Again, let's copy the just created EKS kubeconfig file into AWS Cloud9 environment to be able to use `kubectl` on the AWS Clou9 environment. As such, **you may exit the ssh session** established with the EC2 instance managing the EKS Anywhere cluster, and execute the commands below on the AWS Cloud9 terminal instead.
-
-**Note:**
-
->_Remember to use the value from the `CdkEksAnywhereStack.kubeconfigscpcommand` key before copying the EKS-A kubeconfig file by using scp._ 
-
-![CdkAnywhereStack-scp](./images/CdkAnywhereStack-scp.png)
-
-```bash
-# EKS Anywhere kubeconfig setup
-scp -i cdk-eksa-key-pair.pem ec2-user@X.X.X.X:$HOME/.kube/config $HOME/.kube/config
-export CONTEXT_EKSA=$(kubectl config view -o jsonpath='{.contexts[0].name}')
-mv $HOME/.kube/config $HOME/.kube/eksa.kubeconfig
-```
-
-Nice job. You’ve successfully created an EKS Anywhere cluster and scaled it out to 6 nodes. Now let’s move forward to the next step which is creating an EKS cluster on AWS cloud.
-
----
-
-## 3. Spinning up an EKS cluster on AWS Cloud
+## 2. Spinning up an EKS cluster on AWS Cloud
 
 EKS architecture is designed to eliminate any single points of failure that may compromise the availability and durability of the Kubernetes control plane. The Kubernetes control plane managed by EKS runs inside an EKS managed VPC. The EKS control plane comprises the Kubernetes API server nodes, etcd cluster. Kubernetes API server nodes that run components like the API server, scheduler, and `kube-controller-manager` run in an auto-scaling group. EKS runs a minimum of two API server nodes in distinct Availability Zones (AZs) within an AWS region. Likewise, for durability, the etcd server nodes also run in an auto-scaling group that spans three AZs. EKS runs a NAT Gateway in each AZ, and API servers and etcd servers run in a private subnet. This architecture ensures that an event in a single AZ doesn’t affect the EKS cluster's availability. When you create a new cluster, Amazon EKS creates a highly-available endpoint for the managed Kubernetes API server that you use to communicate with your cluster (using tools like `kubectl`). The managed endpoint uses NLB to load balance Kubernetes API servers. EKS also provisions two ENIs in different AZs to facilitate communication to your worker nodes. 
 
 Creating EKS clusters on AWS Cloud is a simple and straightforward process. There are different ways of accomplish this task(e.g., AWS Console, AWS CLI, AWS CDK, etc), but in this example we’ll utilize `eksctl` which is a CLI tool written in Go for creating EKS clusters on AWS by leveraging Cloudformation to create all infrastructure required(e.g. VPC, subnets, load balancing, internet gateway, auto scaling groups, etc) to get an EKS cluster up and running in just a matter of minutes. More details on how to configure `eksctl` can be found [here](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html).
 
-In this section, we will create the following architecture with an EKS cluster as depicted in the diagram below. The goal is to spin up a new EKS cluster “flavor” to demonstrate how we can manage it together with the previously created EKS Distro and EKS Anywhere clusters. As such, run the following commands to get started with the cluster deployment:
+In this section, we will create the following architecture with an EKS cluster as depicted in the diagram below. The goal is to spin up a new EKS cluster “flavor” to demonstrate how we can manage it together with the previously created EKS Distro. As such, run the following commands to get started with the cluster deployment:
 
 ```bash
 ## Installing eksctl
@@ -927,12 +651,12 @@ Upon cluster creation, you can test if your installation has successfully comple
 
 ![EKS-kubectl-getnodes](./images/EKS-kubectl-getnodes-2.png)
 
-Let’s consolidate the 3 cluster configurations into `$HOME/.kube/config`, which is the first location used by kubectl to find the information it needs to choose a cluster and communicate with the API server of that cluster. As such, run the following commands:
+Let’s consolidate the 2 cluster configurations into `$HOME/.kube/config`, which is the first location used by kubectl to find the information it needs to choose a cluster and communicate with the API server of that cluster. As such, run the following commands:
 
 ```bash
 export CONTEXT_EKS=$(kubectl config view -o jsonpath='{.contexts[0].name}')
 mv $HOME/.kube/config $HOME/.kube/$EKS_CLUSTER_NAME.kubeconfig
-export KUBECONFIG=$HOME/.kube/eksd.kubeconfig:$HOME/.kube/eksa.kubeconfig:$HOME/.kube/$EKS_CLUSTER_NAME.kubeconfig
+export KUBECONFIG=$HOME/.kube/eksd.kubeconfig:$HOME/.kube/$EKS_CLUSTER_NAME.kubeconfig
 kubectl config view --merge --flatten > $HOME/.kube/config
 ```
 
@@ -940,15 +664,13 @@ Let's rename the context from the kubeconfig file to use more friendly names ins
 
 ```bash
 kubectl config rename-context ${CONTEXT_EKSD} EKS-D
-kubectl config rename-context ${CONTEXT_EKSA} EKS-A
 kubectl config rename-context ${CONTEXT_EKS} EKS
 
 export CONTEXT_EKSD="EKS-D"
-export CONTEXT_EKSA="EKS-A"
 export CONTEXT_EKS="EKS"
 ```
 
-Now, display the list of kubernetes contexts which include the 3 EKS clusters that we have created so far.
+Now, display the list of kubernetes contexts which include the 2 EKS clusters created so far.
 
 ```bash
 kubectl config get-contexts
@@ -957,7 +679,7 @@ kubectl config get-contexts
 
 ---
 
-## 4. Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB
+## 3. Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB
 
 Once setup process has completely finished, we can move on and get started with the sample application provisioning which consists of an API written in Node.js. This API will be deployed on top of the 3 EKS clusters to consume a Movies collection stored in Amazon DocumentDB and expose that dataset to be consumed by any external client via REST interface. Here is the API architecture diagram:
 
@@ -1043,7 +765,7 @@ sudo cp mongosh-1.1.7-linux-x64/bin/mongosh /usr/local/bin/
 
 ```bash
 ## Amazon DocumentDB setup
-cd $HOME/environment/aws-eksd-eksa-hybrid/documentdb 
+cd $HOME_REPO/documentdb 
 chmod +x setup_documentdb.sh
 source setup_documentdb.sh
 ```
@@ -1054,19 +776,16 @@ Upon a successful Amazon DocumentDB cluster provisioning(**around 3-5 minutes**)
 
 #### a.2 - VPC peering configuration
 
-As previously shown in the [overall architeture](#overall-eks-hybrid-environment-architecture), you may notice that EKS clusters were provisioned in a different VPC each one. The EKS Anywhere cluster was provisioned in an EC2 instance within the default VPC, similarly as the Amazon DocumentDB cluster, and the other 2 EKS clusters(EKS-D and EKS) created their own VPC. That said, to properly connect each EKS cluster with the Amazon DocumentDB database instance, I'll utilize VPC peering configuration to allow communication flow between the Node REST API VPC's and the Amazon DocumentDB VPC. However, you don't need to worry about setting up route tables, CIDR blocks, and VPC peering itself as I have automated every step for a smoother and straightforward experience. Therefore, you just need to perform the following script so that you're all set:
+As previously shown in the [overall architeture](#overall-eks-hybrid-environment-architecture), you may notice that EKS clusters were provisioned in a different VPC each one. Therefore, in order to properly connect each EKS cluster with the Amazon DocumentDB database instance, we'll utilize VPC peering configuration to allow communication flow between the Node REST API VPC's and the Amazon DocumentDB VPC. However, you don't need to worry about setting up route tables, CIDR blocks, and VPC peering itself as I have automated every step for a smoother and straightforward experience. Therefore, you just need to perform the following script so that you're all set:
 
 ```bash
 ## VPC peering configuration
-cd $HOME/environment/aws-eksd-eksa-hybrid/documentdb 
+cd $HOME_REPO/documentdb 
 chmod +x vpc-peering-setup.sh
 source vpc-peering-setup.sh $CONTEXT_EKSD $EKS_CLUSTER_NAME
 ```
 
 ![VPC_peering_connections](./images/VPC_peering_connections.png)
-
-
-> Once the EKS-A cluster is in the same VPC as the Amazon DocumentDB cluster, there is no need to create VPC peering between them to properly access the Movies collection in the database instance, so the script creates peering only for EKS-D and EKS.
 
 
 #### a.3 - Connecting to the cluster instance
@@ -1119,7 +838,7 @@ Now, run the command below to populate the Sample DB Movies Collection to load w
 
 ```bash
 ## Create DB Movies collection
-mongosh $DBCLUSTER_CONNECTION_STRING --file $HOME/environment/aws-eksd-eksa-hybrid/documentdb/dbmovies.js
+mongosh $DBCLUSTER_CONNECTION_STRING --file $HOME_REPO/documentdb/dbmovies.js
 ```
 
 ![mongosh-EKS-clusters](./images/mongosh-documentdb-load.png)
@@ -1274,7 +993,7 @@ module.exports = router;
 Run the following script in the AWS Cloud9 terminal to create the docker container
 
 ```bash
-cd $HOME/environment/aws-eksd-eksa-hybrid/node-rest-api 
+cd $HOME_REPO/node-rest-api 
 chmod +x build_and_push.sh
 source build_and_push.sh node-rest-api $DBCLUSTER_CONNECTION_STRING_ESCAPE
 ```
@@ -1356,7 +1075,7 @@ sed -i "s|YOUR-CONTAINER-IMAGE|$fullname|g" ./k8s/node-rest-api-deployment.yaml
 
 #### b.2 - Deploying the Node REST API 
  
-Here is the kubernetes service configuration to deploy a REST API in Node.js on top of the EKS environments we just created. It exposes the Movies collection created in Amazon DocumentDB. File is located at **`~/environment/aws-eksd-eksa-hybrid/node-rest-api/k8s/node-rest-api-deployment.yaml`**
+Here is the kubernetes service configuration to deploy a REST API in Node.js on top of the EKS environments we just created. It exposes the Movies collection created in Amazon DocumentDB. File is located at **`$HOME_REPO/node-rest-api/k8s/node-rest-api-deployment.yaml`**
  
 <details>
   <summary>Expand to explore the REST API deployment configuration on EKS</summary> 
@@ -1406,31 +1125,24 @@ spec:
  
  
 ```bash
-## EKS
-kubectl apply --context $CONTEXT_EKS -f $HOME/environment/aws-eksd-eksa-hybrid/node-rest-api/k8s/node-rest-api-deployment.yaml
- 
-## EKS Anywhere
-kubectl apply --context $CONTEXT_EKSA -f $HOME/environment/aws-eksd-eksa-hybrid/node-rest-api/k8s/node-rest-api-deployment.yaml
-
 ## EKS Distro
-kubectl apply --context $CONTEXT_EKSD -f $HOME/environment/aws-eksd-eksa-hybrid/node-rest-api/k8s/node-rest-api-deployment.yaml
+kubectl apply --context $CONTEXT_EKSD -f $HOME_REPO/node-rest-api/k8s/node-rest-api-deployment.yaml
+ 
+## EKS
+kubectl apply --context $CONTEXT_EKS -f $HOME_REPO/node-rest-api/k8s/node-rest-api-deployment.yaml
 ``` 
 ![node-rest-api-apply-deployment](./images/node-rest-api-apply-deployment.png)
 
 After that, you can check on the successfull creation of both Node REST API Service and Replication Controller. 
  
 ```bash
-## EKS
-kubectl describe svc node-rest-api --context $CONTEXT_EKS 
-kubectl describe rc node-rest-api-controller --context $CONTEXT_EKS  
- 
-## EKS Anywhere
-kubectl describe svc node-rest-api --context $CONTEXT_EKSA
-kubectl describe rc node-rest-api-controller --context $CONTEXT_EKSA  
-
 ## EKS Distro
 kubectl describe svc node-rest-api --context $CONTEXT_EKSD
-kubectl describe rc node-rest-api-controller --context $CONTEXT_EKSD   
+kubectl describe rc node-rest-api-controller --context $CONTEXT_EKSD 
+ 
+## EKS
+kubectl describe svc node-rest-api --context $CONTEXT_EKS 
+kubectl describe rc node-rest-api-controller --context $CONTEXT_EKS   
 ```  
 
 ![kubectl-restapi-svc-rc](./images/kubectl-restapi-svc-rc.png)
@@ -1442,10 +1154,7 @@ After creating the kubernetes K8s `node-rest-api` service,  we will be forwardin
 
 ```bash
 ## EKS
-kubectl port-forward service/node-rest-api 3001:3000 --context $CONTEXT_EKS &
- 
-## EKS Anywhere
-kubectl port-forward service/node-rest-api 3002:3000 --context $CONTEXT_EKSA &                              
+kubectl port-forward service/node-rest-api 3001:3000 --context $CONTEXT_EKS &                              
 
 ## EKS Distro
 kubectl port-forward service/node-rest-api 3003:3000 --context $CONTEXT_EKSD &
@@ -1514,9 +1223,6 @@ chmod +x node-rest-api-test.sh
  
 ## EKS
 ./node-rest-api-test.sh 3001
- 
-## EKS Anywhere
-./node-rest-api-test.sh 3002
 
 ## EKS Distro
 ./node-rest-api-test.sh 3003
@@ -1529,17 +1235,17 @@ chmod +x node-rest-api-test.sh
  
 Congratulations!! If you made it to this point, you've finished building, deploying, exposing, and consuming the Movies REST API across all EKS clusters. Next, let's dive deeply on the EKS configuration to connect all clusters in a single dashboard.   
  
-## 5. Monitoring EKS Distro and EKS Anywhere by using EKS Connector (Optional)
+## 4. Monitoring EKS Distro by using EKS Connector (Optional)
 
-After completing the provisioning of the Node REST API in each of the 3 EKS clusters, you should be able to monitor all of them from a single pane of glass as the EKS Connector has been installed for both EKS Distro and EKS Anywhere during deployment through their respective AWS CDK applications, which in turn, ensure they will show up on the EKS Console alongside the regular EKS cluster running on AWS. _**As such, there is no need to run any command shown below as everything has been automated for you. This section is for education purpose only**_.
+After completing the provisioning of the Node REST API in each of the 3 EKS clusters, you should be able to monitor all of them from a single pane of glass as the EKS Connector has been installed for EKS Distro during deployment through its AWS CDK application, which in turn, ensure it will show up on the EKS Console alongside the regular EKS cluster running on AWS. _**As such, there is no need to run any command shown below as everything has been automated for you. This section is for education purpose only**_.
 
 By default, EKS on AWS Cloud automatically always shows up on the AWS Console upon creation. After a cluster is connected, you can see the status, configuration, and workloads for that cluster in the Amazon EKS console, regardless where the cluster is running. 
 
-Amazon EKS provides an integrated dashboard in the AWS console for connecting, visualizing, and troubleshooting Kubernetes clusters and applications. You can leverage the EKS console to view all of your Kubernetes clusters, including EKS Anywhere and EKS Distro clusters running outside of the AWS cloud, thanks to the integration with EKS Connector.
+Amazon EKS provides an integrated dashboard in the AWS console for connecting, visualizing, and troubleshooting Kubernetes clusters and applications. You can leverage the EKS console to view all of your Kubernetes clusters, including EKS Anywhere and EKS Distro clusters running outside of the AWS cloud, among other versions, thanks to the integration with EKS Connector.
 
 In a nutshell, EKS connector is an agent that runs on a Kubernetes cluster which enables it to register with Amazon EKS by creating a secure data channel using AWS Session Manager to federate external Kubernetes cluster on the EKS Console, including clusters from other cloud providers like Anthos, GKE, AKS, OpenShift, Tanzu, Rancher, to name a few examples. 
 
-The cluster can be registered in multiple ways, using AWS CLI, SDK, eksctl, or the AWS console. In this example, I've used `eksctl` within the initialization scripts `src/config.sh` during EKS-D and EKS-A cluster creation to automate the cluster registration with the AWS Console.
+The cluster can be registered in multiple ways, using AWS CLI, SDK, eksctl, or the AWS console. In this example, I've used `eksctl` within the initialization scripts `src/config.sh` during EKS-D cluster building to automate the cluster registration in the AWS Console.
 
 The cluster registration process required two steps: 
 
@@ -1554,17 +1260,17 @@ Below are the permissions required before registering a cluster through an IAM u
 - iam:PassRole
 
 
-### Registered EKS Connector for both EKS Distro and EKS Anywhere
+### Registered EKS Connector for EKS Distro
 
 ![EKS-connector-setup](./images/EKS-connector-setup.png)
 
 
-Whenever you connect the EKS Anywhere cluster in the AWS Management Console through the EKS connector, the `eksctl` creates the service-linked role `AWSServiceRoleForAmazonEKSConnector` for you.
+Whenever you connect the EKS Distro cluster in the AWS Management Console through the EKS connector, the `eksctl` creates the service-linked role `AWSServiceRoleForAmazonEKSConnector` for you.
 
 Amazon EKS uses the service-linked role named `AWSServiceRoleForAmazonEKSConnector`, which contains attached policies to allow the role to manage the necessary resources, to connect to the registered Kubernetes cluster. In addition, as in the example above, it has created the Amazon EKS Connector agent IAM role(named `eksctl-20220426183213240997` in the command output above) which is used by the EKS Connector agent on the Kubernetes cluster to connect to the AWS Systems Manager as required.
  
 
-Also, the integration was completed by applying the Amazon EKS Connector manifest file to both EKS Anywhere and Distro clusters. This manifest contains the configurations for the EKS Connector and a proxy agent which are deployed as a StatefulSet on the two target Kubernetes clusters, EKS Distro and EKS Anywhere, respectively.
+Also, the integration was completed by applying the Amazon EKS Connector manifest file to the EKS Distro cluster. This manifest contains the configurations for the EKS Connector and a proxy agent which are deployed as a StatefulSet on target cluster, EKS Distro.
 
 
 ### Checking EKS Connector status for the EKS clusters
@@ -1572,23 +1278,17 @@ Also, the integration was completed by applying the Amazon EKS Connector manifes
 After applying the Amazon EKS Connector manifest and role binding YAML files to the EKS target clusters, I confirmed that the cluster was properly set up by looking for two pods(`eks-connector-0` and `eks-connector-1`) with status `Running`, meaning the EKS connector installation has been successfully completed. 
 
 EKS Connector acts as a proxy and forwards the EKS console requests to the Kubernetes API server on the connected cluster. Upon successful registration,
-you should be able to get the following list on the EKS Console indicating that configuration has successfully completed with the EKS connector installation for both EKS Anywhere and EKS Distro clusters, and, thus, you can now find all clusters and their resources within a unified dashboard with visibility across all your Kubernetes environments provided by the EKS Console and the integration with the EKS Connector.
+you should be able to get the following list on the EKS Console indicating that configuration has successfully completed with the EKS connector installation for the EKS Distro cluster, and, thus, you can now find clusters and their resources within a unified dashboard with visibility across all your Kubernetes environments provided by the EKS Console and the integration with the EKS Connector.
 
-![EKS-console-3-clusters](./images/EKS-console-3-clusters.png)
+![EKS-console-3-clusters](./images/EKS-console-2-clusters.png)
 
-Now, look into EKS Anywhere to list all nodes from the EKS Anywhere cluster created earlier: 1 master and 6 worker nodes, as shown in the EKS Console below:
+Now, look into EKS Distro to list all nodes from the cluster created earlier: 1 master and 6 worker nodes, as shown in the EKS Console below:
 
-### EKS Anywhere - Nodes
+### EKS Distro - Nodes
 
-![EKS-A-nodes](./images/EKS-A-nodes.png)
+![EKS-D-nodes](./images/EKS-D-nodes.png)
 
-### EKS Anywhere - Node Details 
-
-And note that container runtimes it not based on docker since kind(kubernetes in docker) utilizes _containerd_ as its container runtime instead.
-
-![EKS-A-node-details](./images/EKS-A-node-details.png)
-
-### EKS Anywhere - Node REST API Deployment
+### EKS Distro - Node REST API Deployment
  
 ![EKS-A-RESTAPI-deployment](./images/EKS-A-RESTAPI-deployment.png)
  
@@ -1604,24 +1304,18 @@ To remove the three Amazon EKS clusters created throughout this example, run the
 
 ```bash
 ## Clean up Amazon DocumentDB cluster
-cd ~/environment/aws-eksd-eksa-hybrid/documentdb
-chmod +x remove_documentdb.sh
-./remove_documentdb.sh
+cd $HOME_REPO/documentdb
 chmod +x vpc-peering-destroy.sh
 ./vpc-peering-destroy.sh
+chmod +x remove_documentdb.sh
+./remove_documentdb.sh
  
 ## Clean up EKS Distro
-cd ~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksdistro
+cd $HOME_REPO/cdk/cdk-eksdistro
 ssh -i cdk-eksd-key-pair.pem ec2-user@X.X.X.X ./delete_cluster.sh
 export EKSCONNECTOR_CLUSTER_NAME=eksdistro
 eksctl deregister cluster --name $EKSCONNECTOR_CLUSTER_NAME
 cdk destroy --all
-
-## Clean up EKS Anywhere
-cd ~/environment/aws-eksd-eksa-hybrid/cdk/cdk-eksanywhere
-export EKSA_CLUSTER_NAME=eksa-dev-cluster
-eksctl deregister cluster --name $EKSA_CLUSTER_NAME
-cdk destroy
 
 ## Clean up EKS
 eksctl delete cluster --region=$AWS_REGION --name $EKS_CLUSTER_NAME
@@ -1636,6 +1330,6 @@ aws ecr delete-repository --repository-name "${image}"
 
 ## Conclusion
 
-In this project, you learned how to build development and prototype environments for hybrid software delivery using the AWS CDK to automate EKS Distro and EKS Anywhere environments provisioning for hybrid application development, enabling a smooth experience while standing up development and testing kubernetes environments for applications deployment on top of hybrid EKS environments.  Also, the CDK apps automated the EKS Connector deployment to create a unified view through the EKS console to monitor all EKS development clusters from a single pane of glass. On top of that, you have created a Node REST API service which was utilized to consume and expose a movies collections from a database in Amazon DocumentDB. In turn, this API was provisioned on all the 3 EKS development environments to showcase deployment consistency regardless the deployment option utilized(EKS-D, EKD-A, and EKS) to enable application development for hybrid-EKS-based environments.
+In this project, you learned how to build development and prototype environments for hybrid software delivery using the AWS CDK to automate EKS Distro provisioning for hybrid application development, enabling a smooth experience while standing up development and testing kubernetes environments.  Also, the CDK app automated the EKS Connector deployment to create a unified view through the EKS console to monitor EKS Distro development cluster from a single pane of glass. On top of that, you have created a Node REST API service which was utilized to consume and expose a movies collections from a database in Amazon DocumentDB. In turn, this API was provisioned on EKS development environments to showcase deployment consistency regardless the deployment option utilized(EKS-D or EKS) to enable application development for hybrid EKS based environments.
 
-To learn more, see the [EKS Distro](https://distro.eks.amazonaws.com/), [EKS Anywhere](https://anywhere.eks.amazonaws.com/), and [EKS Connector](https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html) documentation.
+To learn more, see the [EKS Distro](https://distro.eks.amazonaws.com/) and [EKS Connector](https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html) documentation.
