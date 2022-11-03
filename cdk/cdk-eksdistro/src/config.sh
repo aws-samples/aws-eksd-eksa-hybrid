@@ -37,7 +37,9 @@ EOF2
 
 ### Wait for the Cluster to come up
 sudo -u ec2-user -i <<'EOF3'
-#cd eks-distro/development/kops 
+#cd eks-distro/development/kops
+echo "Validating Cluster DNS"
+dig ns $KOPS_CLUSTER_NAME
 echo "Waiting cluster to come up"
 ./cluster_wait.sh
 ### Verify Your Cluster is Running EKS-D
