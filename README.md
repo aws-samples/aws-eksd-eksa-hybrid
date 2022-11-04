@@ -666,6 +666,7 @@ Let's rename the context from the kubeconfig file to use more friendly names ins
 kubectl config rename-context ${CONTEXT_EKSD} EKS-D
 kubectl config rename-context ${CONTEXT_EKS} EKS
 
+export EKSD_DOMAIN=$CONTEXT_EKSD
 export CONTEXT_EKSD="EKS-D"
 export CONTEXT_EKS="EKS"
 ```
@@ -782,7 +783,7 @@ As previously shown in the [overall architeture](#overall-eks-hybrid-environment
 ## VPC peering configuration
 cd $HOME_REPO/documentdb 
 chmod +x vpc-peering-setup.sh
-source vpc-peering-setup.sh $CONTEXT_EKSD $EKS_CLUSTER_NAME
+source vpc-peering-setup.sh $EKSD_DOMAIN $EKS_CLUSTER_NAME
 ```
 
 ![VPC_peering_connections](./images/VPC_peering_connections.png)
