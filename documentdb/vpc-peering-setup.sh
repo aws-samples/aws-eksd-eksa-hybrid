@@ -9,7 +9,7 @@
 export EKSD_DOMAIN=$1
 export EKS_DOMAIN=$2
 
-if [[ "$EKSD_DOMAIN" == "" ]] || [[ "$EKSD_DOMAIN" == "" ]]
+if [[ "$EKSD_DOMAIN" == "" ]] || [[ "$EKS_DOMAIN" == "" ]]
 then
     echo "Usage: $0 <EKS-D domain name> <EKS domain name>"
     exit 1
