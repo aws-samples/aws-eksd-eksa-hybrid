@@ -31,6 +31,7 @@ In this project, you'll get to know how to build and automate creation of develo
 2. [Spinning up an EKS cluster on AWS Cloud](#2-spinning-up-an-eks-cluster-on-aws-cloud)
 3. [Building and Deploying a REST API with Node.js, Express, and Amazon DocumentDB](#3-building-and-deploying-a-rest-api-with-nodejs-express-and-amazon-documentdb)
 4. [Monitoring EKS Distro by using EKS Connector](#4-monitoring-eks-distro-by-using-eks-connector-optional) **(Optional)**
+5. [Walkthrough Demo](#5-walkthrough-demo)
 
 #### Hybrid EKS development environment architecture
 
@@ -1295,6 +1296,11 @@ Now, look into EKS Distro to list all nodes from the cluster created earlier: 1 
  
 ---
 
+## 5. Walkthrough Demo
+
+[![Walkthrough Demo](./images/walkthrough-video.png)](https://youtu.be/hCVXnjxCK3o)
+
+---
 ## Cleanup
 
 To remove the three Amazon EKS clusters created throughout this example, run the following commands in a terminal on the AWS Cloud9 environment. 
